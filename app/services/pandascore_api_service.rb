@@ -3,9 +3,9 @@ class PandascoreApiService
   require 'uri'
   attr_accessor :teams
 
-  def initialize(params)
+  def initialize(params={})
     @esport = params["esport"]
-    @slug = params['slug']
+    # @slug = params[:slug]
     # @series = params[:series_id]
   end
 
@@ -20,8 +20,6 @@ class PandascoreApiService
   end
 
   def get_team_by_slug
-    #binding.pry
-    #uri.query = URI.encode_www_form({:filter['slug'] => 'flash-wolves'})
     @team ||= begin
       request("/lol/teams?filter[slug]=#{@slug}")
     end
@@ -34,10 +32,21 @@ class PandascoreApiService
   #   end
   # end
   
+  def get_past_matches
+    @all_matches ||= begin
+      request("lol/matches/past")
+    end
+  end
+  
+  def get_future_matches
+    @all_matches ||= begin
+      request("lol/matches/upcoming")
+    end
+  end
+
   private
 
   def request(path, body= nil)
-    binding.pry
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     request = Net::HTTP::Get.new(uri.request_uri + path)
@@ -45,7 +54,6 @@ class PandascoreApiService
     request['Authorization'] = ENV['PANDASCORE_API_TOKEN']
     request.body = body if body
     response = http.request(request)
-    binding.pry
     content = response.body.force_encoding("UTF-8")
     JSON.parse(content)
   end

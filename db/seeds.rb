@@ -10,8 +10,12 @@
 teams_slugs = ['solomid', 'cloud9', 'counter-logic-gaming', 'fnatic', 'g2-esports', 'origen', 'sktelecom-t1', 'geng', 'kt-rolster', 'royal-never-give-up', 'edward-gaming', 'invictus-gaming', 'ahq-e-sports-club', 'j-team', 'flash-wolves']
 
 teams_slugs.each do |slug|
-  team = PandascoreApiService.new({slug: 'slug'}).get_team_by_slug
-  new_team = Team.where(slug: team.slug).first_or_initialize
+  team = PandascoreApiService.new({slug: slug}).get_team_by_slug
+  new_team = Team.where(slug: team.first['slug']).first_or_initialize
+  new_team.assign_attributes({
+    name: team.first['name'],
+    slug: team.first['slug']
+  })
   new_team.save!
   # 1) use the slug to find the team's data from pandascore
   # 2) store the data in a variable
@@ -20,3 +24,4 @@ teams_slugs.each do |slug|
   # 5) save
 end
 
+p "Created #{teams_slugs.length} teams!"
