@@ -1,0 +1,3 @@
+class Esport < ApplicationRecord
+  
+end

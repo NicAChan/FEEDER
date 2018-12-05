@@ -1,0 +1,5 @@
+<% @all_teams.each do |team| %>
+  <h1 class="team-name"> <%= team['name']%></h1>
+  <p class='team-game'> <%= team['current_videogame']['slug'] %></p> 
+  <p class='team-slug'><%= team['slug']%></p>
+<% end %>
