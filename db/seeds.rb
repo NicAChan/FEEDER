@@ -17,11 +17,18 @@ teams_slugs.each do |slug|
     slug: team.first['slug']
   })
   new_team.save!
-  # 1) use the slug to find the team's data from pandascore
-  # 2) store the data in a variable
-  # 3) create or initialize an instance where the slug / teamname is equal to the field in your db
-  # 4) set the variables accordingly
-  # 5) save
 end
 
-p "Created #{teams_slugs.length} teams!"
+super_user = User.where(username: 'bobbu').first_or_initialize
+super_user.assign_attributes({
+    first_name: 'Bob',
+    last_name: 'Chan',
+    username: 'bobbu',
+    email: "bobbu@gmail.com",
+    password: 'secret',
+    admin: true
+})
+super_user.save!
+
+p "Created #{Team.all.length} teams!"
+p "Created #{User.all.length} user(s)! Creds: bobbu@gmail.com, secret"

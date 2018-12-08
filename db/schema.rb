@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_05_054817) do
+ActiveRecord::Schema.define(version: 2018_12_05_084319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 2018_12_05_054817) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "team_followings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_team_followings_on_team_id"
+    t.index ["user_id"], name: "index_team_followings_on_user_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -38,6 +47,9 @@ ActiveRecord::Schema.define(version: 2018_12_05_054817) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
   end
 
+  add_foreign_key "team_followings", "teams"
+  add_foreign_key "team_followings", "users"
 end

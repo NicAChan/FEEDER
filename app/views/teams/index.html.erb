@@ -1,5 +1,23 @@
-<% @all_teams.each do |team| %>
-  <h1 class="team-name"> <%= team['name']%></h1>
-  <p class='team-game'> <%= team['current_videogame']['slug'] %></p> 
-  <p class='team-slug'><%= team['slug']%></p>
-<% end %>
+<div class="teams__follow-section">
+  <%if current_user%>
+    <h1 class="teams__select-teams-header"> Select your favorite teams to follow! </h1>
+  <%else%>
+    <h1 class="teams__select-teams-header"> All Teams </h1>
+  <%end%>
+  <%= form_for :search, url: update_user_followed_teams_path, method: :patch do |f| %>
+    <div class="row teams__display-teams-section">
+      <% @all_teams.each do |team| %>
+        <div class="col-md-4">
+          <h1 class="team-name"> <%= team['name']%></h1>
+          <% if current_user %>
+          <%= hidden_field_tag "name[#{team['slug']}]", "0" %>
+          <%= check_box_tag "name[#{team['slug']}]", "1", check_user_follow_team(team['slug']), :data => { :toggle => 'toggle', on: "Following", off: "Not Followed" }%>
+          <% end %>
+        </div>
+      <% end %>
+      <%if current_user%>
+      <%= f.submit "Save Changes", class: "btn btn-danger teams__save-changes-button" %>
+      <%end%>
+    </div>
+  <% end %>
+</div>

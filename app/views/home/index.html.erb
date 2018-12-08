@@ -1,0 +1,3 @@
+<% @followed_team_ids.each do |team_id| %>
+  <h1><%= Team.find(team_id).name %></h1>
+<% end %>

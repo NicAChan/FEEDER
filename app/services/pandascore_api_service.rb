@@ -5,7 +5,7 @@ class PandascoreApiService
 
   def initialize(params={})
     @esport = params["esport"]
-    # @slug = params[:slug]
+    @slug = params[:slug]
     # @series = params[:series_id]
   end
 

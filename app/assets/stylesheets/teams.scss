@@ -1,3 +1,30 @@
 // Place all the styles related to the Teams controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.teams__follow-section {
+  margin: auto;
+  margin-top: 30px;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-bottom: 40px;
+}
+.teams__select-teams-header {
+  text-align: center;
+}
+.teams__display-teams-section {
+  text-align: center;
+}
+.teams__save-changes-button {
+  margin: auto;
+  margin-top: 30px;
+}
+// CSS OVERRIDE
+.toggle-handle {
+  background-color: white;
+}
+.toggle-off {
+  background-color: #ccc;
+}
+.btn-default.off {
+  border: 1px solid #ccc;
+}
