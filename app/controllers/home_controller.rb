@@ -20,6 +20,11 @@ class HomeController < ApplicationController
     end
   end
 
+  def show
+    @match = PandascoreApiService.new().get_match_by_id(params[:id])
+    
+  end
+
   private
 
   def future_matches
@@ -48,7 +53,7 @@ class HomeController < ApplicationController
   end
 
   def find_match_date(match)
-    @date = match['live']['opens_at']
+    @date = match['begin_at']
     Date.parse(@date).strftime('%B %d, %Y')
   end
 end

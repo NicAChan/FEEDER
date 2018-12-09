@@ -33,6 +33,12 @@ class PandascoreApiService
   #   end
   # end
 
+  def get_match_by_id(id)
+    @match ||= begin
+     request("lol/matches/?filter[id]=#{id}")
+    end
+  end
+
   def get_past_matches
     @all_matches ||= begin
       request("lol/matches/past?filter[league_id]=289")
