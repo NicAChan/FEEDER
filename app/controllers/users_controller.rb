@@ -17,10 +17,24 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    respond_to do |format|
+      if @user.update_attributes(user_params)
+        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+        format.json { respond_with_bip(@user) }
+      else
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@user) }
+      end
+    end
   end
 
   # def destroy
-  #   @user.destroy 
+  #   @user.destroy
   #   flash[:success] = "CYA NERD"
   #   redirect_to root_path
   # end
@@ -36,7 +50,7 @@ class UsersController < ApplicationController
       :password,
       :password_confirmation
     )
-  end 
+  end
 
   def find_user
     @user = current_user

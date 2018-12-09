@@ -1,3 +1,17 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user__welcome-text {
+  padding-top: 50px;
+  text-align: center;
+}
+
+.user__edit-instructions {
+  text-align: center;
+}
+
+.user__personal-info {
+  text-align: center;
+  margin-top: 25px;
+}

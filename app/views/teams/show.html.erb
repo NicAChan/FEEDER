@@ -24,17 +24,19 @@
     </div>
     <div>
       <div class="col-md-6 teams-show__past-matches">
-        Past Matches:
+        Match History:
         <% if @filtered_past_matches.flatten.count == 0 %>
           <p>None to display...</p>
         <% else %>
           <% @filtered_past_matches.flatten.each do |match| %>
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title"><%= match['opponents'].first['opponent']['name'] %> vs. <%= match['opponents'].second['opponent']['name'] %></h5>
-                <p class="card-text">Winner: <%= match['winner']['name'] %></p>
+            <%= link_to home_show_path(match['id']), class: "home__match_show_link" do %>
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title"><%= match['opponents'].first['opponent']['name'] %> vs. <%= match['opponents'].second['opponent']['name'] %></h5>
+                  <p class="card-text">Winner: <%= match['winner']['name'] %></p>
+                </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
         <% end %>
       </div>

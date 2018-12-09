@@ -30,6 +30,7 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'bootstrap-toggle-rails'
 gem 'strftime'
+gem 'best_in_place', '~> 3.0.1'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
