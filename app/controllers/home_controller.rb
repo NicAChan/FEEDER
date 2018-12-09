@@ -21,8 +21,9 @@ class HomeController < ApplicationController
   end
 
   def show
-    @match = PandascoreApiService.new().get_match_by_id(params[:id])
-    
+    @match = PandascoreApiService.new().get_match_by_id(params[:id]).first
+    @games = @match['games']
+    # render json: @games
   end
 
   private

@@ -10,3 +10,57 @@
   color: white;
   text-decoration: none;
 }
+
+.home__matches-tabs-selection {
+  width: 300px;
+  line-height: 2.3 !important;
+  font-size: 24px;
+  color: white;
+}
+.home__matches-tabs-selection:hover {
+  text-decoration: none !important;
+  color: white;
+  border: none;
+}
+.home__matches-collapse-button {
+  color: white;
+  background-color: #212529;
+  border-color: #212529;
+}
+.home__matches-collapse-button:focus {
+  box-shadow: none;
+}
+.home__matches-accordion-section {
+  padding-top: 20px;
+}
+.home__none-to-display-text {
+  margin-left: 15px;
+}
+.home_matches-collapse-button:hover {
+  text-decoration: none !important;
+  color: white !important;
+}
+.active {
+  text-decoration: none !important;
+}
+.active a {
+  border-bottom: 4px solid white !important;
+}
+//BOOTSTRAP OVERRIDE
+.directory-nav-center > li {
+  float: none !important;
+  display: inline-block !important;
+  zoom: 1 !important;
+}
+.directory-nav-center {
+  text-align: center !important;
+  background-color: #212529;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+.nav-link.active {
+  border: none !important;
+  border-bottom: 4px solid white !important;
+  background-color: #212529 !important;
+  color: white !important;
+}

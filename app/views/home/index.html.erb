@@ -1,128 +1,23 @@
 <%if current_user%>
-  <div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      Future Matches:
-      <% if @all_filtered_future_matches.count == 0 %>
-        <p>None to display...</p>
-      <% else %>
-        <% @all_filtered_future_matches.each do |match| %>
-        <div class="col-md-4">
-          <%= link_to home_show_path(match['id']) do %>
-            <div class="card" style="width: 30rem;">
-              <div class="card-body">
-                <small class='number_of_games'>Best of <%=match['number_of_games']%></small>
-                <span>
-                  <h5 class="card-title"> 
-                    <%= image_tag "team_logo/#{find_team_logo(match['opponents'].first)}", size: "40"%>
-                    <%= match['opponents'].first['opponent']['name'] %> 
-                    vs. 
-                    <%= match['opponents'].second['opponent']['name'] %>
-                    <%= image_tag "team_logo/#{find_team_logo(match['opponents'].second)}", size: "40"%>
-                  </h5>
-                  <p class="match-date"><%= find_match_date(match) %></p>
-                </span>
-              </div>
-            </div>
-          <% end %>
-        </div>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="col-md-6">
-      Past Matches:
-      <% if @all_filtered_past_matches.count == 0 %>
-        <p>None to display...</p>
-      <% else %>
-        <% @all_filtered_past_matches.each do |match| %>
-        <div class="col-md-4">
-          <%= link_to home_show_path(match['id']), class: 'home__match_show_link' do %>
-            <div class="card" style="width: 30rem;">
-              <div class="card-body">
-                <small class='number_of_games'>Best of <%=match['number_of_games']%></small>
-                <span>
-                  <h5 class="card-title">
-                    <%= image_tag "team_logo/#{find_team_logo(match['opponents'].first)}", size: "40"%>
-                    <%= match['opponents'].first['opponent']['name'] %> 
-                    <%= find_team_score(match['results'], match['opponents'].first) %>
-                    -
-                    <%= find_team_score(match['results'], match['opponents'].second) %>
-                    <%= match['opponents'].second['opponent']['name'] %>
-                    <%= image_tag "team_logo/#{find_team_logo(match['opponents'].second)}", size: "40"%>
-                  </h5>
-                  <p class="match-date"><%= find_match_date(match) %></p>
-                </span>
-                <p class="card-text">Winner: <%= match['winner']['name'] %></p>
-              </div>
-            </div>
-          <%end%>
-        </div>
-        <% end %>
-      <% end %>
+  <div class="home__matches-tabs-section">
+    <ul class="nav nav-tabs directory-nav-center row" id="myTab" role="tablist">
+      <span class="col-sm-3"></span>
+      <li class="nav-item col-sm-3">
+        <a class="nav-link active home__matches-tabs-selection" id="home-tab" data-toggle="tab" href="#upcoming" role="tab" aria-controls="home" aria-selected="true">Upcoming Matches</a>
+      </li>
+      <li class="nav-item col-sm-3">
+        <a class="nav-link home__matches-tabs-selection" id="profile-tab" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Past Matches</a>
+      </li>
+    </ul>
+    <div class="tab-content container" id="myTabContent">
+      <div id="upcoming" class="tab-pane fade show active">
+        <%= render 'home/display_upcoming_matches', all_matches: @all_filtered_future_matches, team_matches: @filtered_future_matches %>
+      </div>
+      <div id="past" class="tab-pane fade">
+        <%= render 'home/display_past_matches', all_matches: @all_filtered_past_matches, team_matches: @filtered_past_matches %>
+      </div>
     </div>
   </div>
-
-  <div class="row">
-    <% @filtered_past_matches.each_with_index do |matches, index| %>
-      <div class="col-md-4">
-        <p> Past Matches for <%= current_user.team_followings[index].team['name'] %> </p>
-        <% if @filtered_past_matches.count == 0 %>
-          <p>None to display...</p>
-        <% else %>
-          <% matches.each do |match| %>
-            <div class="card" style="width: 30rem;">
-              <div class="card-body">
-                <small class='number_of_games'>Best of <%=match['number_of_games']%></small>
-                <span>
-                  <h5 class="card-title">
-                    <%= image_tag "team_logo/#{find_team_logo(match['opponents'].first)}", size: "40"%>
-                    <%= match['opponents'].first['opponent']['name'] %> 
-                    <%= find_team_score(match['results'], match['opponents'].first) %>
-                    -
-                    <%= find_team_score(match['results'], match['opponents'].second) %>
-                    <%= match['opponents'].second['opponent']['name'] %>
-                    <%= image_tag "team_logo/#{find_team_logo(match['opponents'].second)}", size: "40"%>
-                  </h5>
-                  <p class="match-date"><%= find_match_date(match) %></p>
-                </span>
-                <p class="card-text">Winner: <%= match['winner']['name'] %></p>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="row">
-    <% @filtered_future_matches.each_with_index do |matches, index| %>
-      <div class="col-md-4">
-        <p> Future Matches for <%= current_user.team_followings[index].team['name'] %> </p>
-        <% if @filtered_future_matches %>
-          <p>None to display...</p>
-        <% else %>
-          <% matches.each do |match| %>
-            <div class="card" style="width: 30rem;">
-              <div class="card-body">
-                <small class='number_of_games'>Best of <%=match['number_of_games']%></small>
-                <span>
-                  <h5 class="card-title"> 
-                    <%= image_tag "team_logo/#{find_team_logo(match['opponents'].first)}", size: "40"%>
-                    <%= match['opponents'].first['opponent']['name'] %> 
-                    vs. 
-                    <%= match['opponents'].second['opponent']['name'] %>
-                    <%= image_tag "team_logo/#{find_team_logo(match['opponents'].second)}", size: "40"%>
-                  </h5>
-                  <p class="match-date"><%= find_match_date(match) %></p>
-                </span>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-</div>
 <%else%>
   <h1>Welcome to Feeder!</h1>
   <%= link_to( "Log In", new_sessions_path, class: "btn btn-primary btn-lg mr-4") %>

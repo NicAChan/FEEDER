@@ -1,0 +1,84 @@
+<div class="container home__matches-accordion-section">
+  <div id="past-accordion">
+    <div class="card">
+      <div class="card-header" id="allPastMatchesHeader">
+        <h5 class="mb-0">
+          <button class="btn home__matches-collapse-button" data-toggle="collapse" data-target="#allPastMatches" aria-expanded="true" aria-controls="allPastMatches">
+            All Past Matches
+          </button>
+        </h5>
+      </div>
+
+      <div id="allPastMatches" class="collapse show" aria-labelledby="allPastMatchesHeader" data-parent="#past-accordion">
+        <div class="card-body">
+          <% if all_matches.count == 0 %>
+            <p class="home__none-to-display-text">None to display...</p>
+          <% else %>
+            <% all_matches.each do |match| %>
+              <%= link_to home_show_path(match['id']), class: 'home__match_show_link' do %>
+                <div class="card" style="width: 30rem;">
+                  <div class="card-body home__match_show_link">
+                    <small class='number_of_games'>Best of <%=match['number_of_games']%></small>
+                    <span>
+                      <h5 class="card-title">
+                        <%= image_tag "team_logo/#{find_team_logo(match['opponents'].first)}", size: "40"%>
+                        <%= match['opponents'].first['opponent']['name'] %>
+                        <%= find_team_score(match['results'], match['opponents'].first) %>
+                        -
+                        <%= find_team_score(match['results'], match['opponents'].second) %>
+                        <%= match['opponents'].second['opponent']['name'] %>
+                        <%= image_tag "team_logo/#{find_team_logo(match['opponents'].second)}", size: "40"%>
+                      </h5>
+                      <p class="match-date"><%= find_match_date(match) %></p>
+                    </span>
+                    <p class="card-text">Winner: <%= match['winner']['name'] %></p>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <% team_matches.each_with_index do |matches, index| %>
+      <div class="card">
+        <div class="card-header" id="heading-past-<%=index%>">
+          <h5 class="mb-0">
+            <%= button_tag "Past Matches for #{current_user.team_followings[index].team['name']}", class: "btn collapsed home__matches-collapse-button", data: { toggle: "collapse", target: "#collapse-past-#{index}"}, aria: {expanded: false, controls: "collapse-past-#{index}"} %>
+          </h5>
+        </div>
+        <div id="collapse-past-<%=index%>" class="collapse" aria-labelledby="heading-past-<%=index%>" data-parent="#past-accordion">
+          <div class="card-body">
+            <% if matches.empty? %>
+              <p class="home__none-to-display-text">None to display...</p>
+            <% else %>
+              <% matches.each do |match| %>
+              <%= link_to home_show_path(match['id']), class: "home__match_show_link" do %>
+                <div class="card" style="width: 30rem;">
+                  <div class="card-body">
+                    <small class='number_of_games'>Best of <%=match['number_of_games']%></small>
+                    <span>
+                      <h5 class="card-title">
+                        <%= image_tag "team_logo/#{find_team_logo(match['opponents'].first)}", size: "40"%>
+                        <%= match['opponents'].first['opponent']['name'] %>
+                        <%= find_team_score(match['results'], match['opponents'].first) %>
+                        -
+                        <%= find_team_score(match['results'], match['opponents'].second) %>
+                        <%= match['opponents'].second['opponent']['name'] %>
+                        <%= image_tag "team_logo/#{find_team_logo(match['opponents'].second)}", size: "40"%>
+                      </h5>
+                      <p class="match-date"><%= find_match_date(match) %></p>
+                    </span>
+                    <p class="card-text">Winner: <%= match['winner']['name'] %></p>
+                  </div>
+                </div>
+              <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
