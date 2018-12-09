@@ -22,19 +22,17 @@
 
       <% end %>
     </div>
-    <div>
-      <div class="col-md-6 teams-show__past-matches">
-        Match History:
-        <% if @filtered_past_matches.flatten.count == 0 %>
-          <p>None to display...</p>
-        <% else %>
-          <% @filtered_past_matches.flatten.each do |match| %>
-            <%= link_to home_show_path(match['id']), class: "home__match_show_link" do %>
-              <%= render 'shared/match_cards', match: match, location: 'team' %>
-            <% end %>
+    <div class="col-md-6 teams-show__past-matches">
+      Match History:
+      <% if @filtered_past_matches.flatten.count == 0 %>
+        <p>None to display...</p>
+      <% else %>
+        <% @filtered_past_matches.flatten.each do |match| %>
+          <%= link_to home_show_path(match['id']), class: "home__match_show_link" do %>
+            <%= render 'shared/match_cards', match: match, location: 'team' %>
           <% end %>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
