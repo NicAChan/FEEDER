@@ -61,10 +61,11 @@
 
 .home-show__match-history-score {
   margin-top: 45px;
+  justify-content: center;
 }
 
 .home-show__match-score-result {
-  margin-top: 20px;
+  margin-top: 35px;
   font-size: 24px;
   padding-left: 10px;
   padding-right: 10px;
@@ -73,9 +74,18 @@
 
 .home-show__best-of-games-text {
   margin-top: 25px;
+  text-align: center;
 }
 
-.home-show__match-completed-on-date {
+.home-show__match_date {
+  margin-top: 1rem;
+}
+
+.home-show__team-name-and-score{
+  margin-top: 15px;
+}
+
+.home-show__match-scheduled-on-date {
   margin-top: -10px;
 }
 
@@ -83,6 +93,7 @@
   width: 80%;
   margin: auto;
   margin-top: 25px;
+  text-align: center;
 }
 
 .home__match-score-style {

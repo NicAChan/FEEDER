@@ -16,26 +16,7 @@
           <% else %>
             <% all_matches.each do |match| %>
               <%= link_to home_show_path(match['id']), class: 'home__match_show_link' do %>
-                <div class="card" style="width: 30rem;">
-                  <div class="card-body home__match_show_link">
-                    <small class='number_of_games'>Best of <%=match['number_of_games']%></small>
-                    <span>
-                      <h5 class="card-title">
-                        <%= image_tag "team_logo/#{find_team_logo(match['opponents'].first)}", size: "40"%>
-                        <%= match['opponents'].first['opponent']['name'] %>
-                        <span class="home__match-score-style">
-                          <%= find_team_score(match['results'], match['opponents'].first) %>
-                          -
-                          <%= find_team_score(match['results'], match['opponents'].second) %>
-                        </span>
-                        <%= match['opponents'].second['opponent']['name'] %>
-                        <%= image_tag "team_logo/#{find_team_logo(match['opponents'].second)}", size: "40"%>
-                      </h5>
-                      <p class="match-date"><%= find_match_date(match) %></p>
-                    </span>
-                    <p class="card-text">Winner: <%= match['winner']['name'] %></p>
-                  </div>
-                </div>
+                <%= render 'shared/match_cards', match: match, location: 'past' %>
               <% end %>
             <% end %>
           <% end %>

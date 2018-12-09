@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  helper_method :check_user_follow_team, :player_role, :find_team_score
+  helper_method :check_user_follow_team, :player_role, :find_team_score, :find_match_date
 
   def index
     # esport = params[:esport]
@@ -73,6 +73,11 @@ class TeamsController < ApplicationController
     else
       "Coach"
     end
+  end
+
+  def find_match_date(match)
+    @date = match['begin_at']
+    Date.parse(@date).strftime('%B %d, %Y')
   end
 
   def find_team_score(results, team)

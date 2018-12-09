@@ -30,20 +30,7 @@
         <% else %>
           <% @filtered_past_matches.flatten.each do |match| %>
             <%= link_to home_show_path(match['id']), class: "home__match_show_link" do %>
-              <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    <%= match['opponents'].first['opponent']['name'] %> 
-                    <span class="team__match-score-style">
-                    <%= find_team_score(match['results'], match['opponents'].first) %>
-                    -
-                    <%= find_team_score(match['results'], match['opponents'].second) %>
-                    </span>
-                    <%= match['opponents'].second['opponent']['name'] %>
-                    </h5>
-                  <p class="card-text">Winner: <span class="teams-show__match-winner"><%= match['winner']['name'] %></span></p>
-                </div>
-              </div>
+              <%= render 'shared/match_cards', match: match, location: 'team' %>
             <% end %>
           <% end %>
         <% end %>
