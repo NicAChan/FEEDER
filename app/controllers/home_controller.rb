@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   before_action :user_teams
 
-  helper_method :find_team_logo, :find_team_score, :find_match_date
+  helper_method :find_team_logo, :find_team_score, :find_match_date, :get_game_winner
 
   def index
     @all_future_matches = future_matches
@@ -56,5 +56,10 @@ class HomeController < ApplicationController
   def find_match_date(match)
     @date = match['begin_at']
     Date.parse(@date).strftime('%B %d, %Y')
+  end
+
+  def get_game_winner(winner_id)
+    @winner = PandascoreApiService.new({team_id: winner_id}).get_team_by_id
+    @winner.first
   end
 end

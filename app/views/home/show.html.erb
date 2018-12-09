@@ -75,7 +75,9 @@
   <div class="row">
     <% @games.each do |game| %>
       <div class="col-sm">
-        
+       <h3>Game <%= game['position'] %></h3>
+       <h4><%= get_game_winner(game['winner']['id'])['acronym'] %> Win</h4>
+       <h5>Duration: <%= game['length'] / 60  %> minutes</h5>       
       </div>
     <% end %>
   </div>
