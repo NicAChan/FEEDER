@@ -17,7 +17,8 @@ teams_slugs.each do |slug|
   new_team.assign_attributes({
     name: team.first['name'],
     slug: team.first['slug'],
-    league_id: 289
+    league_id: 289,
+    api_team_id: team.first['id']
   })
   new_team.save!
 end

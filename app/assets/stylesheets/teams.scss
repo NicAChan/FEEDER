@@ -17,6 +17,24 @@
   margin: auto;
   margin-top: 30px;
 }
+.teams__team-details-link {
+  color: white;
+}
+.teams__team-details-link:hover {
+  color: white;
+  text-decoration: none;
+}
+.teams-show__team-name-section {
+  text-align: center;
+  padding-top: 50px;
+}
+.teams-show__team-player-image {
+  height: 100px;
+}
+.team-show__player-details {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 // CSS OVERRIDE
 .toggle-handle {
   background-color: white;
@@ -34,19 +52,15 @@
 }
 .card-img-top {
   margin: auto;
-  
   width: 100px;
   height: 100px;
 }
-
 .card-body {
   background-color: #212529;
 }
-
 .toggle.btn.off {
   color: #212529;
 }
-
 .save-changes {
   padding: 2rem;
 }

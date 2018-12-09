@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
   before_action :user_teams
 
+  helper_method :find_team_logo, :find_team_score, :find_match_date
+
   def index
     @all_future_matches = future_matches
     @all_past_matches = past_matches
@@ -30,5 +32,23 @@ class HomeController < ApplicationController
 
   def user_teams
     [Team.first.slug] # current_user.teams
+  end
+
+  def find_team_logo(team)
+    team['opponent']['slug']
+  end
+
+  def find_team_score(results, team)
+    @team_id = team['opponent']['id']
+    if results.first['team_id'] == @team_id
+      return results.first['score']
+    else results.second['team_id'] == @team_id
+      return results.second['score']
+    end
+  end
+
+  def find_match_date(match)
+    @date = match['live']['opens_at']
+    Date.parse(@date).strftime('%B %d, %Y')
   end
 end

@@ -8,17 +8,18 @@
     <div class="row teams__display-teams-section">
       <% @all_teams.each do |team| %>
         <div class="col-md-4">
-
-          <div class="card" style="width: 18rem;">
-            <%= image_tag("team_logo/#{team.slug}", class: "card-img-top") %>
-            <div class="card-body">
-              <h5 class="card-title"><%= team['name']%></h5>
-              <% if current_user %>
-                <%= hidden_field_tag "name[#{team['slug']}]", "0" %>
-                <%= check_box_tag "name[#{team['slug']}]", "1", check_user_follow_team(team['slug']), :data => { :toggle => 'toggle', on: "Following", off: "Not Followed" }%>
-              <% end %>
+          <%= link_to team_path(team.id), class: "teams__team-details-link" do %>
+            <div class="card" style="width: 18rem;">
+              <%= image_tag("team_logo/#{team.slug}", class: "card-img-top") %>
+              <div class="card-body">
+                <h5 class="card-title"><%= team['name']%></h5>
+                <% if current_user %>
+                  <%= hidden_field_tag "name[#{team['slug']}]", "0" %>
+                  <%= check_box_tag "name[#{team['slug']}]", "1", check_user_follow_team(team['slug']), :data => { :toggle => 'toggle', on: "Following", off: "Not Followed" }%>
+                <% end %>
+              </div>
             </div>
-          </div>        
+          <% end %>
         </div>
       <% end %>
     </div>

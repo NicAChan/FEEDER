@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="teams-show__team-name-section">
+    <h1 class="teams-show__team-logo-with-name"> <%= image_tag "team_logo/#{@team['slug']}", size: "100" %> <%= @team['name'] %> </h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 teams-show__players-section">
+      <h2> Players </h2>
+      <% @team["players"].each do |player| %>
+        <div class="row team-show__player-details">
+          <div class="col-md-3">
+            <%= image_tag "#{player['image_url']}", class: "teams-show__team-player-image" %>
+          </div>
+          <div class="col-md-9">
+            <p> Name: <%= player["first_name"] %> <%= player["last_name"] %> </p>
+            <p> In Game Name: <%= player["name"] %> </p>
+            <p> Role: <%= player_role(player["role"]) %> </p>
+            <p> Home: <%= player["hometown"] %> </p>
+          </div>
+
+        </div>
+
+      <% end %>
+    </div>
+    <div>
+      <div class="col-md-6 teams-show__past-matches">
+        Past Matches:
+        <% if @filtered_past_matches.flatten.count == 0 %>
+          <p>None to display...</p>
+        <% else %>
+          <% @filtered_past_matches.flatten.each do |match| %>
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title"><%= match['opponents'].first['opponent']['name'] %> vs. <%= match['opponents'].second['opponent']['name'] %></h5>
+                <p class="card-text">Winner: <%= match['winner']['name'] %></p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

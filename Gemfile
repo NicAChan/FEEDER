@@ -29,6 +29,7 @@ gem 'cancancan', '~> 2.0'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'bootstrap-toggle-rails'
+gem 'strftime'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
