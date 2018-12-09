@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  helper_method :check_user_follow_team, :player_role
+  helper_method :check_user_follow_team, :player_role, :find_team_score
 
   def index
     # esport = params[:esport]
@@ -72,6 +72,15 @@ class TeamsController < ApplicationController
       "Support"
     else
       "Coach"
+    end
+  end
+
+  def find_team_score(results, team)
+    @team_id = team['opponent']['id']
+    if results.first['team_id'] == @team_id
+      return results.first['score']
+    else results.second['team_id'] == @team_id
+      return results.second['score']
     end
   end
 end

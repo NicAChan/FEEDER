@@ -1,0 +1,12 @@
+
+<div class="home__user-not-logged-in-section">
+  <%= image_tag("logo_transparent", border:0, size: "300") %>
+
+
+  <h1 class="home__welcome-to-feeder">Welcome to Feeder!</h1>
+
+  <div class="home__not-logged-in-user-option-buttons-section">
+    <%= link_to( "Log In", new_sessions_path, class: "btn btn-lg mr-4 home__task-option-buttons") %>
+    <%= link_to( "Sign Up", new_user_path, class: "btn btn-lg home__task-option-buttons" )%>
+  </div>
+</div>

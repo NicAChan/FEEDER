@@ -19,7 +19,5 @@
     </div>
   </div>
 <%else%>
-  <h1>Welcome to Feeder!</h1>
-  <%= link_to( "Log In", new_sessions_path, class: "btn btn-primary btn-lg mr-4") %>
-  <%= link_to( "Sign Up", new_user_path, class: "btn btn-primary btn-lg" )%>
+  <%= render 'home/user_not_logged_in' %>
 <%end%>

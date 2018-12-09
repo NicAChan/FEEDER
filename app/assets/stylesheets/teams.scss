@@ -1,6 +1,10 @@
 // Place all the styles related to the Teams controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.team__match-score-style {
+  color: #f29b10;
+}
+
 .teams__follow-section {
   margin: auto;
   padding-top: 30px;
@@ -35,6 +39,15 @@
   padding-top: 15px;
   padding-bottom: 15px;
 }
+
+.teams-show__player-info {
+  margin-bottom: 5px;
+}
+
+.teams-show__match-winner {
+  color: #f29b10;
+}
+
 // CSS OVERRIDE
 .toggle-handle {
   background-color: white;

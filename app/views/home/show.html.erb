@@ -1,87 +1,96 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="match-context">
-      <p>
-        <%= @match['league']['name'] %>
-        <%= @match['serie']['year'] %>
-        <%= @match['serie']['season'] %>
-        -
-        <%= @match['tournament']['name'] %>
-      </p>
+  <h2 class="home-show__match-history-title"> Match Details</h2>
+  <div class="home-show__match-history-league-and-logo">
+    <%= image_tag "#{@match['league']['image_url']}", size: "120" %>
+    <span class="home-show__match-history-league-info">
+      <%= @match['league']['name'] %>
+      <%= @match['serie']['year'] %>
+      <%= @match['serie']['season'] %>
+      -
+      <%= @match['tournament']['name'] %>
+    </span>
+  </div>
+
+  <div class="row home-show__match-history-score">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+      <h4 class="home-show__best-of-games-text"> Best of <%= @match['number_of_games']%> </h4>
     </div>
-    <div class="match-date">
+    <div class="col-md-6">
+      <div class="home-show__match-team-one text-center">
+        <div class="row">
+          <%= image_tag("team_logo/#{find_team_logo(@match['opponents'].first)}", size: "70") %>
+          <div class="team">
+            <div class="col-md">
+              <h3 class="team_name"><%=@match['opponents'].first['opponent']['name']%></h3>
+              <p>
+                <% if @match['winner']['name'] == @match['opponents'].first['opponent']['name'] %>
+                  VICTORY
+                <%else%>
+                  DEFEAT
+                <%end%>
+              </p>
+            </div>
+          </div>
+
+          <h5 class="home-show__match-score-result">
+            <% if @match['status'] == 'finished'%>
+              <%= find_team_score(@match['results'], @match['opponents'].first) %>
+              -
+              <%= find_team_score(@match['results'], @match['opponents'].second) %>
+            <% else %>
+              VS
+            <% end %>
+          </h5>
+
+          <div class="team">
+            <div class="col-md">
+              <h3 class="team_name"><%=@match['opponents'].last['opponent']['name']%></h3>
+              <p>
+                <% if @match['winner']['name'] == @match['opponents'].last['opponent']['name']%>
+                  VICTORY
+                <%else%>
+                  DEFEAT
+                <%end%>
+              </p>
+            </div>
+          </div>
+          <%= image_tag("team_logo/#{find_team_logo(@match['opponents'].last)}", size: "70") %>
+
+
+        </div>
+        <span>
+      </div>
+    </div>
+    <div class="col-md-3">
       <p>
         Match
         <% if @match['status'] == 'finished' %>
-          Completed 
+          Completed
         <% else %>
           Scheduled
         <% end %>
-        On
-        <%= find_match_date(@match) %>
+        On:
       </p>
+      <h3 class="home-show__match-completed-on-date"> <%= find_match_date(@match) %> </h3>
     </div>
+
   </div>
 </div>
 
-<div class="container-fluid">
-  <h4 class="match-typ">
-    Best of <%= @match['number_of_games']%>
-  </h4>
 
-  <div class="row">
-    <div class="team">
-      <div class="col-md">
-        <h1 class="team_name"><%=@match['opponents'].first['opponent']['name']%></h1>
-        <p>
-          <% if @match['winner']['name'] == @match['opponents'].first['opponent']['name'] %>
-            VICTORY
-          <%else%>
-            DEFEAT
-          <%end%>
-        </p>
-      </div>
-    </div>
-    <%= image_tag("team_logo/#{find_team_logo(@match['opponents'].first)}", size: "70") %>
-
-    <h5 class="score">
-      <% if @match['status'] == 'finished'%>
-        <%= find_team_score(@match['results'], @match['opponents'].first) %>
-        -
-        <%= find_team_score(@match['results'], @match['opponents'].second) %>
-      <% else %>
-        VS
-      <% end %>
-    </h5>
-    
-    <div class="team">
-      <div class="col-md">
-        <h1 class="team_name"><%=@match['opponents'].last['opponent']['name']%></h1>
-        <p>
-          <% if @match['winner']['name'] == @match['opponents'].last['opponent']['name']%>
-            VICTORY
-          <%else%>
-            DEFEAT
-          <%end%>
-        </p>
-      </div>
-    </div>
-    <%= image_tag("team_logo/#{find_team_logo(@match['opponents'].last)}", size: "70") %>
-  </div>
-</div>
-
-<div class="container-fluid">
+<div class="home-show__match-time-completed">
   <% if @games.count > 1 %>
   <div class="row">
     <% @games.each do |game| %>
       <div class="col-sm">
        <h3>Game <%= game['position'] %></h3>
        <h4><%= get_game_winner(game['winner']['id'])['acronym'] %> Win</h4>
-       <h5>Duration: <%= game['length'] / 60  %> minutes</h5>       
+       <h5>Duration: <%= game['length'] / 60  %> minutes</h5>
       </div>
     <% end %>
   </div>
-  <% else %>
+  <% elsif @games.count > 0 %>
     <h5>Duration: <%= @games.first['length'] / 60  %> minutes</h5>
   <% end %>
 </div>

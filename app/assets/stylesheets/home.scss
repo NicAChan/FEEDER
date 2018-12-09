@@ -6,6 +6,10 @@
   color: white;
 }
 
+.home__matches-tabs-section {
+  padding-bottom: 50px;
+}
+
 .home__match_show_link:hover {
   color: white;
   text-decoration: none;
@@ -40,12 +44,73 @@
   text-decoration: none !important;
   color: white !important;
 }
-.active {
-  text-decoration: none !important;
+
+.home-show__match-history-title {
+  text-align: center;
+  padding-top: 30px;
 }
-.active a {
-  border-bottom: 4px solid white !important;
+
+.home-show__match-history-league-and-logo {
+  text-align: center;
+  padding-top: 20px;
 }
+
+.home-show__match-history-league-info {
+  font-size: 22px;
+}
+
+.home-show__match-history-score {
+  margin-top: 45px;
+}
+
+.home-show__match-score-result {
+  margin-top: 20px;
+  font-size: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #f29b10;
+}
+
+.home-show__best-of-games-text {
+  margin-top: 25px;
+}
+
+.home-show__match-completed-on-date {
+  margin-top: -10px;
+}
+
+.home-show__match-time-completed {
+  width: 80%;
+  margin: auto;
+  margin-top: 25px;
+}
+
+.home__match-score-style {
+  color: #f29b10;
+}
+
+.home__user-not-logged-in-section {
+  text-align: center;
+  padding-top: 40px;
+}
+
+.home__welcome-to-feeder {
+  margin-top: 40px;
+}
+
+.home__not-logged-in-user-option-buttons-section {
+  margin-top: 30px;
+}
+
+.home__task-option-buttons {
+  background-color: #f29b10;
+  color: white !important;
+}
+
+.home__task-option-buttons:focus {
+  box-shadow: none;
+}
+
 //BOOTSTRAP OVERRIDE
 .directory-nav-center > li {
   float: none !important;
@@ -60,7 +125,8 @@
 }
 .nav-link.active {
   border: none !important;
-  border-bottom: 4px solid white !important;
+  border-bottom: 4px solid #f29b10 !important;
+  color: #f29b10 !important;
   background-color: #212529 !important;
-  color: white !important;
+  //color: white !important;
 }

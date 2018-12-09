@@ -42,7 +42,7 @@
       <div class="card">
         <div class="card-header" id="heading-upcoming-<%=index%>">
           <h5 class="mb-0">
-            <%= button_tag "Future Matches for #{current_user.team_followings[index].team['name']}", class: "btn collapsed home__matches-collapse-button", data: { toggle: "collapse", target: "#collapse-upcoming-#{index}"}, aria: {expanded: false, controls: "collapse-upcoming-#{index}"} %>
+            <%= button_tag "Upcoming Matches for #{current_user.team_followings[index].team['name']}", class: "btn collapsed home__matches-collapse-button", data: { toggle: "collapse", target: "#collapse-upcoming-#{index}"}, aria: {expanded: false, controls: "collapse-upcoming-#{index}"} %>
           </h5>
         </div>
         <div id="collapse-upcoming-<%=index%>" class="collapse" aria-labelledby="heading-upcoming-<%=index%>" data-parent="#upcoming-accordion">

@@ -23,9 +23,11 @@
                       <h5 class="card-title">
                         <%= image_tag "team_logo/#{find_team_logo(match['opponents'].first)}", size: "40"%>
                         <%= match['opponents'].first['opponent']['name'] %>
-                        <%= find_team_score(match['results'], match['opponents'].first) %>
-                        -
-                        <%= find_team_score(match['results'], match['opponents'].second) %>
+                        <span class="home__match-score-style">
+                          <%= find_team_score(match['results'], match['opponents'].first) %>
+                          -
+                          <%= find_team_score(match['results'], match['opponents'].second) %>
+                        </span>
                         <%= match['opponents'].second['opponent']['name'] %>
                         <%= image_tag "team_logo/#{find_team_logo(match['opponents'].second)}", size: "40"%>
                       </h5>

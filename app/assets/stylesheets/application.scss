@@ -12,14 +12,14 @@
  *
   *= require bootstrap-toggle
  */
- 
- @import "bootstrap";
- @import "home";
- @import "sessions";
- @import "teams";
- @import "users";
 
- main {
+@import "bootstrap";
+@import "home";
+@import "sessions";
+@import "teams";
+@import "users";
+
+main {
   background-color: #212529;
   color: white;
   min-height: 800px;
@@ -28,4 +28,8 @@
 .alert {
   margin: 0;
   border-radius: 0;
+}
+
+.application__navbar-nav-text {
+  color: white !important;
 }

@@ -12,10 +12,10 @@
             <%= image_tag "#{player['image_url']}", class: "teams-show__team-player-image" %>
           </div>
           <div class="col-md-9">
-            <p> Name: <%= player["first_name"] %> <%= player["last_name"] %> </p>
-            <p> In Game Name: <%= player["name"] %> </p>
-            <p> Role: <%= player_role(player["role"]) %> </p>
-            <p> Home: <%= player["hometown"] %> </p>
+            <p class="teams-show__player-info"> Name: <%= player["first_name"] %> <%= player["last_name"] %> </p>
+            <p class="teams-show__player-info"> In Game Name: <%= player["name"] %> </p>
+            <p class="teams-show__player-info"> Role: <%= player_role(player["role"]) %> </p>
+            <p class="teams-show__player-info"> Home: <%= player["hometown"] %> </p>
           </div>
 
         </div>
@@ -32,8 +32,16 @@
             <%= link_to home_show_path(match['id']), class: "home__match_show_link" do %>
               <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                  <h5 class="card-title"><%= match['opponents'].first['opponent']['name'] %> vs. <%= match['opponents'].second['opponent']['name'] %></h5>
-                  <p class="card-text">Winner: <%= match['winner']['name'] %></p>
+                  <h5 class="card-title">
+                    <%= match['opponents'].first['opponent']['name'] %> 
+                    <span class="team__match-score-style">
+                    <%= find_team_score(match['results'], match['opponents'].first) %>
+                    -
+                    <%= find_team_score(match['results'], match['opponents'].second) %>
+                    </span>
+                    <%= match['opponents'].second['opponent']['name'] %>
+                    </h5>
+                  <p class="card-text">Winner: <span class="teams-show__match-winner"><%= match['winner']['name'] %></span></p>
                 </div>
               </div>
             <% end %>
