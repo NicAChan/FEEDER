@@ -3,10 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .teams__follow-section {
   margin: auto;
-  margin-top: 30px;
+  padding-top: 30px;
   padding-left: 10%;
   padding-right: 10%;
-  margin-bottom: 40px;
 }
 .teams__select-teams-header {
   text-align: center;
@@ -27,4 +26,27 @@
 }
 .btn-default.off {
   border: 1px solid #ccc;
+}
+.card {
+  margin: 0.5rem;
+  border-color: rgb(82, 82, 82);
+  background-color: #212529;
+}
+.card-img-top {
+  margin: auto;
+  
+  width: 100px;
+  height: 100px;
+}
+
+.card-body {
+  background-color: #212529;
+}
+
+.toggle.btn.off {
+  color: #212529;
+}
+
+.save-changes {
+  padding: 2rem;
 }

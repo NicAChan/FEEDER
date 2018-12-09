@@ -7,9 +7,12 @@ class FilterMatchesByTeamService
 
   def filter_matches
     filtered_array = []
-    @matches.each do |match|
-      if match['slug'].include?(@team)
-        filtered_array << match
+    @matches.each do |match| 
+      return filtered_array if match.first == "error" || match.first == "status"
+      match['opponents'].each do |opponent|
+        if opponent['opponent']['slug'].include?(@team)
+          filtered_array << match
+        end
       end
     end
     filtered_array

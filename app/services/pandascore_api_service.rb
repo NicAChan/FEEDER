@@ -6,6 +6,7 @@ class PandascoreApiService
   def initialize(params={})
     @esport = params["esport"]
     @slug = params[:slug]
+    @match_id = params[:match_id]
     # @series = params[:series_id]
   end
 
@@ -16,7 +17,7 @@ class PandascoreApiService
   def get_all_teams
     @all_teams ||= begin
       request("/#{@esport}/teams")
-    end 
+    end
   end
 
   def get_team_by_slug
@@ -31,16 +32,16 @@ class PandascoreApiService
   #     request("/lol/series/#{@series}/teams")
   #   end
   # end
-  
+
   def get_past_matches
     @all_matches ||= begin
-      request("lol/matches/past")
+      request("lol/matches/past?filter[league_id]=289")
     end
   end
-  
+
   def get_future_matches
     @all_matches ||= begin
-      request("lol/matches/upcoming")
+      request("lol/matches/upcoming?filter[league_id]=289")
     end
   end
 

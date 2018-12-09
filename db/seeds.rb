@@ -7,14 +7,17 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-teams_slugs = ['solomid', 'cloud9', 'counter-logic-gaming', 'fnatic', 'g2-esports', 'origen', 'sktelecom-t1', 'geng', 'kt-rolster', 'royal-never-give-up', 'edward-gaming', 'invictus-gaming', 'ahq-e-sports-club', 'j-team', 'flash-wolves']
+# teams_slugs = ['solomid', 'cloud9', 'counter-logic-gaming', 'fnatic', 'g2-esports', 'origen', 'sktelecom-t1', 'geng', 'kt-rolster', 'royal-never-give-up', 'edward-gaming', 'invictus-gaming', 'ahq-e-sports-club', 'j-team', 'flash-wolves']
+
+teams_slugs = ['solomid', 'cloud9', 'counter-logic-gaming', 'liquid', '100-thieves', 'echo-fox', 'flyquest', 'clutch-gaming', 'optic-gaming', 'golden-guardians']
 
 teams_slugs.each do |slug|
   team = PandascoreApiService.new({slug: slug}).get_team_by_slug
   new_team = Team.where(slug: team.first['slug']).first_or_initialize
   new_team.assign_attributes({
     name: team.first['name'],
-    slug: team.first['slug']
+    slug: team.first['slug'],
+    league_id: 289
   })
   new_team.save!
 end

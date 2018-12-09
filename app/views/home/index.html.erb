@@ -1,3 +1,76 @@
-<% @followed_team_ids.each do |team_id| %>
-  <h1><%= Team.find(team_id).name %></h1>
-<% end %>
+<%if current_user%>
+  <div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      Future Matches:
+      <% if @all_filtered_future_matches.count == 0 %>
+        <p>None to display...</p>
+      <% else %>
+        <% @all_filtered_future_matches.each do |match| %>
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title"><%= match['opponents'].first['opponent']['name'] %> vs. <%= match['opponents'].second['opponent']['name'] %></h5>
+              <p class="card-text">Winner: <%= match['winner']['name'] %></p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      Past Matches:
+      <% if @all_filtered_past_matches.count == 0 %>
+        <p>None to display...</p>
+      <% else %>
+        <% @all_filtered_past_matches.each do |match| %>
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title"><%= match['opponents'].first['opponent']['name'] %> vs. <%= match['opponents'].second['opponent']['name'] %></h5>
+              <p class="card-text">Winner: <%= match['winner']['name'] %></p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <% @filtered_past_matches.each_with_index do |matches, index| %>
+      <div class="col-md-4">
+        <p> Past Matches for <%= current_user.team_followings[index].team['name'] %> </p>
+        <% if @filtered_past_matches.count == 0 %>
+          <p>None to display...</p>
+        <% else %>
+          <% matches.each do |match| %>
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title"><%= match['opponents'].first['opponent']['name'] %> vs. <%= match['opponents'].second['opponent']['name'] %></h5>
+                <p class="card-text">Winner: <%= match['winner']['name'] %></p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <% @filtered_future_matches.each_with_index do |matches, index| %>
+      <div class="col-md-4">
+        <p> Future Matches for <%= current_user.team_followings[index].team['name'] %> </p>
+        <% if @filtered_future_matches %>
+          <p>None to display...</p>
+        <% else %>
+          <% matches.each do |match| %>
+            <h5 class="card-title"><%= match['opponents'].first['opponent']['name'] %> vs. <%= match['opponents'].second['opponent']['name'] %></h5>
+            <p class="card-text">Winner: <%= match['winner']['name'] %></p>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%else%>
+  <h1>Welcome to Feeder!</h1>
+  <%= link_to( "Log In", new_sessions_path, class: "btn btn-primary btn-lg mr-4") %>
+  <%= link_to( "Sign Up", new_user_path, class: "btn btn-primary btn-lg" )%>
+<%end%>
