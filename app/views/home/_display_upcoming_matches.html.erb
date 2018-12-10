@@ -43,11 +43,15 @@
                     <small class='number_of_games'>Best of <%=match['number_of_games']%></small>
                     <span>
                       <h5 class="card-title">
+                        <% if File.file?("#{Rails.root}/app/assets/images/team_logo/#{find_team_logo(match['opponents'].first)}.png") %>
                         <%= image_tag "team_logo/#{find_team_logo(match['opponents'].first)}", size: "40"%>
+                        <% end %>
                         <%= match['opponents'].first['opponent']['name'] %>
                         vs.
                         <%= match['opponents'].second['opponent']['name'] %>
+                        <% if File.file?("#{Rails.root}/app/assets/images/team_logo/#{find_team_logo(match['opponents'].second)}.png") %>
                         <%= image_tag "team_logo/#{find_team_logo(match['opponents'].second)}", size: "40"%>
+                        <% end %>
                       </h5>
                       <p class="match-date"><%= find_match_date(match) %></p>
                     </span>

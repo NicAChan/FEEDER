@@ -17,8 +17,14 @@ class TeamsController < ApplicationController
     @filtered_past_matches = []
     team = Team.find(params[:id])
     @team = PandascoreApiService.new({slug: team.slug}).get_team_by_slug.first
-    @filtered_future_matches << FilterMatchesByTeamService.new(future_matches, team.slug).filter_matches.flatten
-    @filtered_past_matches << FilterMatchesByTeamService.new(past_matches, team.slug).filter_matches.flatten
+
+    if FilterMatchesByTeamService.new(future_matches(team.league_id), team.slug).present?
+      @filtered_future_matches << FilterMatchesByTeamService.new(future_matches(team.league_id), team.slug).filter_matches.flatten
+    end
+
+    if FilterMatchesByTeamService.new(past_matches(team.league_id), team.slug).present?
+      @filtered_past_matches << FilterMatchesByTeamService.new(past_matches(team.league_id), team.slug).filter_matches.flatten
+    end
   end
 
 
@@ -52,12 +58,12 @@ class TeamsController < ApplicationController
 
   private
 
-  def future_matches
-    @future_matches = PandascoreApiService.new().get_future_matches
+  def future_matches(league_id)
+    @future_matches = PandascoreApiService.new({league_id: league_id}).get_future_matches
   end
 
-  def past_matches
-    @past_matches = PandascoreApiService.new().get_past_matches
+  def past_matches(league_id)
+    @past_matches = PandascoreApiService.new({league_id: league_id}).get_past_matches
   end
 
   def player_role(role)

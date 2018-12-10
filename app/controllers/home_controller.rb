@@ -23,17 +23,32 @@ class HomeController < ApplicationController
   def show
     @match = PandascoreApiService.new().get_match_by_id(params[:id]).first
     @games = @match['games']
+    @team1 = Team.where(api_team_id: @match['opponents'].first['opponent']['id']).first
+    @team2 = Team.where(api_team_id: @match['opponents'].last['opponent']['id']).first
+    
     # render json: @games
   end
 
   private
 
-  def future_matches
-      @future_matches = PandascoreApiService.new().get_future_matches
+  def future_matches    
+    all_matches = []
+    @future_nalcs_matches = PandascoreApiService.new({league_id: 289}).get_future_matches
+    @future_lec_matches = PandascoreApiService.new({league_id: 290}).get_future_matches
+    all_matches << @future_nalcs_matches
+    all_matches << @future_lec_matches
+
+    all_matches.flatten
   end
 
   def past_matches
-    @past_matches = PandascoreApiService.new().get_past_matches
+    all_matches = []
+    @past_nalcs_matches = PandascoreApiService.new({league_id: 289}).get_past_matches
+    @past_lec_matches = PandascoreApiService.new({league_id: 290}).get_past_matches
+    all_matches << @past_nalcs_matches
+    all_matches << @past_lec_matches
+
+    all_matches.flatten
   end
 
   def user_teams
@@ -62,4 +77,5 @@ class HomeController < ApplicationController
     @winner = PandascoreApiService.new({team_id: winner_id}).get_team_by_id
     @winner.first
   end
+
 end

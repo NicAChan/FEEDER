@@ -28,19 +28,21 @@
   <h4 class="home-show__best-of-games-text"> Best of <%= @match['number_of_games']%> </h4>
     <div class="home-show__match-team-one text-center">
       <div class="row home-show__match-history-score">
-        <%= image_tag("team_logo/#{find_team_logo(@match['opponents'].first)}", size: "100") %>
-        <div class="team home-show__team-name-and-score">
-          <div class="col-md">
-            <h3 class="team_name"><%=@match['opponents'].first['opponent']['name']%></h3>
-            <p>
-              <% if @match['winner']['name'] == @match['opponents'].first['opponent']['name'] %>
-                VICTORY
-              <%else%>
-                DEFEAT
-              <%end%>
-            </p>
+        <%= link_to team_path(@team1.id), class: "row teams__team-details-link" do %>
+          <%= image_tag("team_logo/#{find_team_logo(@match['opponents'].first)}", size: "100") %>
+          <div class="team home-show__team-name-and-score">
+            <div class="col-md">
+              <h3 class="team_name"><%=@match['opponents'].first['opponent']['name']%></h3>
+              <p>
+                <% if @match['winner']['name'] == @match['opponents'].first['opponent']['name'] %>
+                  VICTORY
+                <%else%>
+                  DEFEAT
+                <%end%>
+              </p>
+            </div>
           </div>
-        </div>
+        <% end %>
 
         <h5 class="home-show__match-score-result">
           <% if @match['status'] == 'finished'%>
@@ -52,29 +54,27 @@
           <% end %>
         </h5>
 
-        <div class="team home-show__team-name-and-score">
-          <div class="col-md">
-            <h3 class="team_name"><%=@match['opponents'].last['opponent']['name']%></h3>
-            <p>
-              <% if @match['winner']['name'] == @match['opponents'].last['opponent']['name']%>
-                VICTORY
-              <%else%>
-                DEFEAT
-              <%end%>
-            </p>
+        <%= link_to team_path(@team2.id), class: "row teams__team-details-link" do %>
+          <div class="team home-show__team-name-and-score">
+            <div class="col-md">
+              <h3 class="team_name"><%=@match['opponents'].last['opponent']['name']%></h3>
+              <p>
+                <% if @match['winner']['name'] == @match['opponents'].last['opponent']['name']%>
+                  VICTORY
+                <%else%>
+                  DEFEAT
+                <%end%>
+              </p>
+            </div>
           </div>
-        </div>
-        <%= image_tag("team_logo/#{find_team_logo(@match['opponents'].last)}", size: "100") %>
-
+          <%= image_tag("team_logo/#{find_team_logo(@match['opponents'].last)}", size: "100") %>
+        <% end %>
 
       </div>
       <span>
     </div>
-    
-
   
 </div>
-
 
 <div class="home-show__match-time-completed">
   <% if @games.count > 1 %>
