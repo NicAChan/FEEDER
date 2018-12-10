@@ -8,6 +8,8 @@ class TeamsController < ApplicationController
     # @all_teams = PandascoreApiService.new({:series_id => '1605'}).get_series_teams
     @user = current_user
     @all_teams = Team.all
+    @nalcs_teams = Team.where(league_id: 289)
+    @lec_teams = Team.where(league_id: 290)
   end
 
   def show
@@ -87,5 +89,5 @@ class TeamsController < ApplicationController
     else results.second['team_id'] == @team_id
       return results.second['score']
     end
-  end
+  end  
 end

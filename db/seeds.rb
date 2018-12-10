@@ -9,15 +9,29 @@
 
 # teams_slugs = ['solomid', 'cloud9', 'counter-logic-gaming', 'fnatic', 'g2-esports', 'origen', 'sktelecom-t1', 'geng', 'kt-rolster', 'royal-never-give-up', 'edward-gaming', 'invictus-gaming', 'ahq-e-sports-club', 'j-team', 'flash-wolves']
 
-teams_slugs = ['solomid', 'cloud9', 'counter-logic-gaming', 'liquid', '100-thieves', 'echo-fox', 'flyquest', 'clutch-gaming', 'optic-gaming', 'golden-guardians']
+na_teams_slugs = ['solomid', 'cloud9', 'counter-logic-gaming', 'liquid', '100-thieves', 'echo-fox', 'flyquest', 'clutch-gaming', 'optic-gaming', 'golden-guardians']
 
-teams_slugs.each do |slug|
+eu_teams_slugs = ['splyce', 'sk-gaming', 'misfits', 'vitality', 'origen', 'fc-schalke-04', 'excel-esports', 'fnatic', 'g2-esports', 'rogue-league-of-legends']
+
+na_teams_slugs.each do |slug|
   team = PandascoreApiService.new({slug: slug}).get_team_by_slug
   new_team = Team.where(slug: team.first['slug']).first_or_initialize
   new_team.assign_attributes({
     name: team.first['name'],
     slug: team.first['slug'],
     league_id: 289,
+    api_team_id: team.first['id']
+  })
+  new_team.save!
+end
+
+eu_teams_slugs.each do |slug|
+  team = PandascoreApiService.new({slug: slug}).get_team_by_slug
+  new_team = Team.where(slug: team.first['slug']).first_or_initialize
+  new_team.assign_attributes({
+    name: team.first['name'],
+    slug: team.first['slug'],
+    league_id: 290,
     api_team_id: team.first['id']
   })
   new_team.save!
