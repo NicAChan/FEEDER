@@ -33,8 +33,8 @@ class HomeController < ApplicationController
 
   def future_matches    
     all_matches = []
-    @future_nalcs_matches = PandascoreApiService.new({league_id: 289}).get_future_matches
-    @future_lec_matches = PandascoreApiService.new({league_id: 290}).get_future_matches
+    @future_nalcs_matches = PandascoreApiService.new({league_id: 4198}).get_future_matches
+    @future_lec_matches = PandascoreApiService.new({league_id: 4197}).get_future_matches
     all_matches << @future_nalcs_matches
     all_matches << @future_lec_matches
 
@@ -43,8 +43,8 @@ class HomeController < ApplicationController
 
   def past_matches
     all_matches = []
-    @past_nalcs_matches = PandascoreApiService.new({league_id: 289}).get_past_matches
-    @past_lec_matches = PandascoreApiService.new({league_id: 290}).get_past_matches
+    @past_nalcs_matches = PandascoreApiService.new({league_id: 4198}).get_past_matches
+    @past_lec_matches = PandascoreApiService.new({league_id: 4197}).get_past_matches
     all_matches << @past_nalcs_matches
     all_matches << @past_lec_matches
 

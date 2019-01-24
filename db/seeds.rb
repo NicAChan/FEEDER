@@ -11,7 +11,7 @@
 
 na_teams_slugs = ['solomid', 'cloud9', 'counter-logic-gaming', 'liquid', '100-thieves', 'echo-fox', 'flyquest', 'clutch-gaming', 'optic-gaming', 'golden-guardians']
 
-eu_teams_slugs = ['splyce', 'sk-gaming', 'misfits', 'vitality', 'origen', 'fc-schalke-04', 'excel-esports', 'fnatic', 'g2-esports', 'rogue-league-of-legends']
+eu_teams_slugs = ['splyce', 'sk-gaming', 'misfits', 'vitality', 'origen', 'fc-schalke-04', 'excel-esports', 'fnatic', 'g2-esports', 'rogue']
 
 na_teams_slugs.each do |slug|
   team = PandascoreApiService.new({slug: slug}).get_team_by_slug
@@ -19,7 +19,7 @@ na_teams_slugs.each do |slug|
   new_team.assign_attributes({
     name: team.first['name'],
     slug: team.first['slug'],
-    league_id: 289,
+    league_id: 4198,
     api_team_id: team.first['id']
   })
   new_team.save!
@@ -31,7 +31,7 @@ eu_teams_slugs.each do |slug|
   new_team.assign_attributes({
     name: team.first['name'],
     slug: team.first['slug'],
-    league_id: 290,
+    league_id: 4197,
     api_team_id: team.first['id']
   })
   new_team.save!

@@ -33,13 +33,15 @@
           <div class="team home-show__team-name-and-score">
             <div class="col-md">
               <h3 class="team_name"><%=@match['opponents'].first['opponent']['name']%></h3>
-              <p>
-                <% if @match['winner']['name'] == @match['opponents'].first['opponent']['name'] %>
-                  VICTORY
-                <%else%>
-                  DEFEAT
-                <%end%>
-              </p>
+              <% if @match['status'] == 'finished' %>
+                <p>
+                  <% if @match['winner']['name'] == @match['opponents'].first['opponent']['name'] %>
+                    VICTORY
+                  <%else%>
+                    DEFEAT
+                  <%end%>
+                </p>
+              <% end %>
             </div>
           </div>
         <% end %>
@@ -58,13 +60,15 @@
           <div class="team home-show__team-name-and-score">
             <div class="col-md">
               <h3 class="team_name"><%=@match['opponents'].last['opponent']['name']%></h3>
-              <p>
-                <% if @match['winner']['name'] == @match['opponents'].last['opponent']['name']%>
-                  VICTORY
-                <%else%>
-                  DEFEAT
-                <%end%>
-              </p>
+              <% if @match['status'] == 'finished' %>
+                <p>
+                  <% if @match['winner']['name'] == @match['opponents'].last['opponent']['name']%>
+                    VICTORY
+                  <%else%>
+                    DEFEAT
+                  <%end%>
+                </p>
+              <% end %>
             </div>
           </div>
           <%= image_tag("team_logo/#{find_team_logo(@match['opponents'].last)}", size: "100") %>
@@ -76,18 +80,20 @@
   
 </div>
 
-<div class="home-show__match-time-completed">
-  <% if @games.count > 1 %>
-  <div class="row">
-    <% @games.each do |game| %>
-      <div class="col-sm">
-       <h3>Game <%= game['position'] %></h3>
-       <h4><%= get_game_winner(game['winner']['id'])['acronym'] %> Win</h4>
-       <h5>Duration: <%= game['length'] / 60  %> minutes</h5>
-      </div>
+<% if @match['status'] == 'finished' %>
+  <div class="home-show__match-time-completed">
+    <% if @games.count > 1 %>
+    <div class="row">
+      <% @games.each do |game| %>
+        <div class="col-sm">
+        <h3>Game <%= game['position'] %></h3>
+        <h4><%= get_game_winner(game['winner']['id'])['acronym'] %> Win</h4>
+        <h5>Duration: <%= game['length'] / 60  %> minutes</h5>
+        </div>
+      <% end %>
+    </div>
+    <% elsif @games.count > 0 %>
+      <h5>Duration: <%= @games.first['length'] / 60  %> minutes</h5>
     <% end %>
   </div>
-  <% elsif @games.count > 0 %>
-    <h5>Duration: <%= @games.first['length'] / 60  %> minutes</h5>
-  <% end %>
-</div>
+<% end %>

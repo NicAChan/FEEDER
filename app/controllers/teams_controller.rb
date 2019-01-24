@@ -8,8 +8,8 @@ class TeamsController < ApplicationController
     # @all_teams = PandascoreApiService.new({:series_id => '1605'}).get_series_teams
     @user = current_user
     @all_teams = Team.all
-    @nalcs_teams = Team.where(league_id: 289)
-    @lec_teams = Team.where(league_id: 290)
+    @nalcs_teams = Team.where(league_id: 4198)
+    @lec_teams = Team.where(league_id: 4197)
   end
 
   def show
