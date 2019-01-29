@@ -10,7 +10,9 @@
     <p> Email: <%= best_in_place @user, :email, :as => :input %></p>
     <p> Followed Teams: </p>
     <% @user.followed_teams.each do |team| %>
-      <p> <%= team.name %></p>
+      <%= link_to team_path(team.id), class: "teams__team-details-link" do %>
+        <p> <%= team.name %></p>
+      <% end %>
     <% end %>
   </div>
 
