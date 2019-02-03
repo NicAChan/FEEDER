@@ -31,6 +31,7 @@ gem 'jquery-rails'
 gem 'bootstrap-toggle-rails'
 gem 'strftime'
 gem 'best_in_place', '~> 3.0.1'
+gem 'exception_handler', '~> 0.8.0.0'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

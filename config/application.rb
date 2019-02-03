@@ -29,5 +29,31 @@ module Feeder
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.exception_handler = {
+      dev:        "on", # allows you to turn ExceptionHandler "on" in development
+      db:         nil, # allocates a "table name" into which exceptions are saved (defaults to nil)
+      email:      nil, # sends exception emails to a listed email (string // "you@email.com")
+
+
+      # This is an entirely NEW structure for the "layouts" area
+      # You're able to define layouts, notifications etc ↴
+
+      # All keys interpolated as strings, so you can use symbols, strings or integers where necessary
+      exceptions: {
+
+        # This is the old structure
+        # Still works but will be deprecated in future versions
+
+        501 => "exception",
+        502 => "exception",
+        503 => "exception",
+        504 => "exception",
+        505 => "exception",
+        507 => "exception",
+        510 => "exception"
+
+      }
+    }
   end
 end
