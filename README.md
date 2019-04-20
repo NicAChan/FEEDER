@@ -17,4 +17,4 @@
   rails db:migrate
   rails db:seed
 
-* Run 'rails s' in the CLI. When the server is ready, access the app on http://localhost:3000
+* Run 'rails s' in the CLI. When the server is ready, access the app on http://localhost:1337
