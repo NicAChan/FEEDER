@@ -29,7 +29,7 @@
     <div class="home-show__match-team-one text-center">
       <div class="row home-show__match-history-score">
         <%= link_to team_path(@team1.id), class: "row teams__team-details-link" do %>
-          <%= image_tag("team_logo/#{find_team_logo(@match['opponents'].first)}", size: "100") %>
+          <%= image_tag("team_logo/#{find_team_logo(@match['opponents'].first)}.png", size: "100") %>
           <div class="team home-show__team-name-and-score">
             <div class="col-md">
               <h3 class="team_name"><%=@match['opponents'].first['opponent']['name']%></h3>
@@ -71,7 +71,7 @@
               <% end %>
             </div>
           </div>
-          <%= image_tag("team_logo/#{find_team_logo(@match['opponents'].last)}", size: "100") %>
+          <%= image_tag("team_logo/#{find_team_logo(@match['opponents'].last)}.png", size: "100") %>
         <% end %>
 
       </div>

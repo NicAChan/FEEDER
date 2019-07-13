@@ -4,7 +4,7 @@
       <div class="col-md-4">
         <%= link_to team_path(team.id), class: "teams__team-details-link" do %>
           <div class="card" style="width: 18rem;">
-            <%= image_tag("team_logo/#{team.slug}", class: "card-img-top") %>
+            <%= image_tag("team_logo/#{team.slug}.png", class: "card-img-top") %>
             <div class="card-body">
               <h5 class="card-title"><%= team['name']%></h5>
               <% if current_user %>
